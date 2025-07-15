@@ -1,9 +1,10 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.orm import relationship
 from src.connection_api.db.base import Base
 
 
-class Puzzle(Base):
+class Puzzle(Base, AsyncAttrs):
     __tablename__ = "puzzles"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -14,7 +15,7 @@ class Puzzle(Base):
     groups = relationship("Group", back_populates="puzzle")
 
 
-class Group(Base):
+class Group(Base, AsyncAttrs):
     __tablename__ = "groups"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -26,7 +27,7 @@ class Group(Base):
     items = relationship("Item", back_populates="group")
 
 
-class Item(Base):
+class Item(Base, AsyncAttrs):
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True, index=True)
